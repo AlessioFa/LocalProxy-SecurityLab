@@ -81,21 +81,27 @@ Per verificare il funzionamento, ho configurato il mio browser (**Firefox**) per
 **Risultato**: Tentando di accedere ai siti inseriti nella blacklist, il browser visualizza correttamente la pagina di errore "Access Denied" generata da Squid.
 
 
+## Fase D: Hardening e Sicurezza
+
+Nell'ultima fase, ho applicato misure di **Hardening** per nascondere le informazioni sensibili del server (Anti-Fingerprinting) e prevenire attacchi di esaurimento risorse (DoS).
+
+Ho modificato `squid.conf` aggiungendo le seguenti direttive di sicurezza:
 
 
+# 1. Anti-Fingerprinting
+# Nasconde la versione di Squid (evita CVE lookup da parte di attaccanti)
+header_access Via deny all
+# Nasconde l'IP originale del client interno
+header_access X-Forwarded-For deny all
 
+# 2. Protezione DoS (Resource Exhaustion)
+# Limita la cache su disco a 100MB per evitare il riempimento della memoria
+cache_dir ufs /var/spool/squid 100 16 256
 
-
-
-
-
-
-
-
-
-
-
-
+# 3. Rate Limiting
+# Blocca gli IP che aprono più di 10 connessioni simultanee (mitigazione DoS/Botnet interne)
+acl over_limit maxconn 10
+http_access deny over_limit
 
 
 
