@@ -1,3 +1,11 @@
+Hai perfettamente ragione, è brutto perché **mancano gli "a capo" (invio)** tra le righe.
+
+Il Markdown è molto schizzinoso: se scrivi `Testo.**Grassetto**` tutto attaccato, lui non capisce e ti mostra gli asterischi. Devi dare "aria" al testo.
+
+Ecco la versione **corretta e pulita**. Ho aggiunto tutte le spaziature necessarie affinché GitHub lo trasformi in una pagina bella da vedere (con le linee, i titoli grandi e i grassetti veri).
+
+Copia e incolla questo blocco intero nel tuo `README.md` della cartella `nginx/`:
+
 ````markdown
 # Configurazione Reverse Proxy (Nginx)
 
@@ -11,7 +19,9 @@ L'obiettivo è proteggere un **Backend Server** simulato (che gira su una porta 
 Lo scenario simulato sulla macchina locale (`localhost`) è il seguente:
 
 1.  **Client (Browser):** Accede al sito pubblico `www.miositoesterno.com` (simulato via `/etc/hosts`).
+
 2.  **Front-End (Nginx):** Ascolta sulla porta **80**, riceve la richiesta, applica i controlli di sicurezza e la gira al backend.
+
 3.  **Back-End (Python):** Un semplice server HTTP in ascolto sulla porta **8080** che contiene i dati "segreti".
 
 ---
@@ -19,9 +29,11 @@ Lo scenario simulato sulla macchina locale (`localhost`) è il seguente:
 ## 📝 Diario di Configurazione
 
 ### Fase A: Preparazione Backend e Installazione
+
 Non avendo un secondo server fisico, ho simulato il Backend utilizzando il modulo `http.server` di Python.
 
 **Comandi eseguiti:**
+
 ```bash
 # Terminale 1: Avvio del Backend Simulato
 # Crea una risposta finta per verificare l'accesso
@@ -55,6 +67,9 @@ Per proteggere il server da attacchi DoS (Denial of Service) e Fingerprinting, h
 limit_req_zone $binary_remote_addr zone=one:10m rate=1r/s;
 
 server {
+    listen 80;
+    server_name [www.miositoesterno.com](https://www.miositoesterno.com);
+
     # 2. Anti-Fingerprinting
     # Nasconde la versione di Nginx dagli header di risposta
     server_tokens off;
@@ -65,7 +80,11 @@ server {
         limit_req zone=one burst=5 nodelay;
         
         proxy_pass [http://127.0.0.1:8080](http://127.0.0.1:8080);
-        # ... altri header ...
+        
+        # Propagazione degli header originali
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
 }
 ```
@@ -76,4 +95,7 @@ server {
 2.  **Test Accesso:** Visitando `http://www.miositoesterno.com`, vedo correttamente la pagina servita da Python (Porta 8080).
 3.  **Test DoS (Rate Limiting):** Aggiornando rapidamente la pagina (più di 5 volte al secondo), Nginx blocca le richieste restituendo l'errore **503 Service Temporarily Unavailable**.
 
-````
+<!-- end list -->
+
+```
+```
