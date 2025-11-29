@@ -1,0 +1,4 @@
+# Lista dei domini bloccati (inclusi sottodomini)
+.facebook.com
+.bing.com
+.gazzetta.it

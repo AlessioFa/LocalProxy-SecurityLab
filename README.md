@@ -6,6 +6,7 @@
 
 1.  **Forward Proxy (Squid):** Configurato per filtrare il traffico in uscita, gestire Access Control Lists (ACL) e implementare l'autenticazione utente.
 2.  **Reverse Proxy (Nginx):** Implementato per proteggere un backend server simulato, mascherando l'infrastruttura interna e mitigando attacchi comuni.
+3. **apache2-utils-y:** Utility suite utilizzata per la generazione degli hash delle password (htpasswd) necessari per l'autenticazione in Squid.
 
 ### Cosa sto imparando
 Attraverso questo progetto, sto mettendo in pratica concetti chiave della cybersecurity:
