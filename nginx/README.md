@@ -1,15 +1,7 @@
-Hai perfettamente ragione, è brutto perché **mancano gli "a capo" (invio)** tra le righe.
-
-Il Markdown è molto schizzinoso: se scrivi `Testo.**Grassetto**` tutto attaccato, lui non capisce e ti mostra gli asterischi. Devi dare "aria" al testo.
-
-Ecco la versione **corretta e pulita**. Ho aggiunto tutte le spaziature necessarie affinché GitHub lo trasformi in una pagina bella da vedere (con le linee, i titoli grandi e i grassetti veri).
-
-Copia e incolla questo blocco intero nel tuo `README.md` della cartella `nginx/`:
-
-````markdown
 # Configurazione Reverse Proxy (Nginx)
 
 In questa sezione del laboratorio ho configurato **Nginx** come *Reverse Proxy*.
+
 L'obiettivo è proteggere un **Backend Server** simulato (che gira su una porta interna), nascondendolo dal traffico diretto e applicando filtri di sicurezza avanzati.
 
 ---
@@ -40,7 +32,6 @@ Non avendo un secondo server fisico, ho simulato il Backend utilizzando il modul
 mkdir backend_segreto
 echo "<h1>Backend Raggiunto!</h1>" > index.html
 python3 -m http.server 8080 --bind 127.0.0.1
-````
 
 Successivamente (in un secondo terminale) ho installato Nginx:
 
