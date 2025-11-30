@@ -2,7 +2,9 @@
 
 **Obiettivo: Simulazione di un'infrastruttura di rete sicura sfruttando Squid e Nginx**
 
-*Questo repository documenta il mio laboratorio pratico sviluppato per la comprensione delle dinamiche di sicurezza web. L'obiettivo è stato quello di configurare e mettere in sicurezza due componenti critici di rete all'interno di un ambiente locale Ubuntu:*
+*Questo repository documenta il laboratorio pratico svolto durante i miei studi presso l'istituto **ITS-ICT Academy**, seguendo le direttive del docente di Sicurezza Informatica.*
+
+*Il progetto è stato sviluppato per comprendere a fondo le dinamiche di sicurezza web, con l'obiettivo di configurare e mettere in sicurezza (hardening) due componenti critici di rete all'interno di un ambiente locale Ubuntu:*
 
 1.  **Forward Proxy (Squid):** Configurato per filtrare il traffico in uscita, gestire Access Control Lists (ACL) e implementare l'autenticazione utente.
 2.  **Reverse Proxy (Nginx):** Implementato per proteggere un backend server simulato, mascherando l'infrastruttura interna e mitigando attacchi comuni.
