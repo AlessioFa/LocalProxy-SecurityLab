@@ -61,13 +61,13 @@ Per proteggere l'accesso al proxy, ho implementato un sistema di autenticazione 
 * **Creazione Utente:** Ho generato l'utente utente_proxy nel file /etc/squid/passwd.
 * **Configurazione:** Ho aggiunto queste direttive in squid.conf e disabilitato l'accesso libero da localhost:
 
-    # Configurazione Basic Authentication
+    * Configurazione Basic Authentication
       auth_param basic program /usr/lib/squid/basic_ncsa_auth /etc/squid/passwd
       auth_param basic realm "Accesso Riservato Laboratorio"
       acl utenti_autenticati proxy_auth REQUIRED
 
-    # Abilitazione accesso solo agli utenti autenticati
-    # (Nota: ho commentato la riga 'http_access allow localhost')
+    * Abilitazione accesso solo agli utenti autenticati
+    * Nota: ho commentato la riga 'http_access allow localhost')
       http_access allow utenti_autenticati
 
 
@@ -89,17 +89,17 @@ Ho modificato `squid.conf` aggiungendo le seguenti direttive di sicurezza:
 
 
 # 1. Anti-Fingerprinting
-# Nasconde la versione di Squid (evita CVE lookup da parte di attaccanti)
+  Nasconde la versione di Squid (evita CVE lookup da parte di attaccanti)
 header_access Via deny all
-# Nasconde l'IP originale del client interno
+  Nasconde l'IP originale del client interno
 header_access X-Forwarded-For deny all
 
 # 2. Protezione DoS (Resource Exhaustion)
-# Limita la cache su disco a 100MB per evitare il riempimento della memoria
+  Limita la cache su disco a 100MB per evitare il riempimento della memoria
 cache_dir ufs /var/spool/squid 100 16 256
 
 # 3. Rate Limiting
-# Blocca gli IP che aprono più di 10 connessioni simultanee (mitigazione DoS/Botnet interne)
+  Blocca gli IP che aprono più di 10 connessioni simultanee (mitigazione DoS/Botnet interne)
 acl over_limit maxconn 10
 http_access deny over_limit
 
